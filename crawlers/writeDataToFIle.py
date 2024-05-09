@@ -1,6 +1,5 @@
 from .removeEmptyLines import removeEmptyLines
 import os
-from .CustomError import CustomError
 
 def write_data(data):
     data = removeEmptyLines(data)

@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from .CustomError import CustomError
 from .writeDataToFIle import write_data
 
 def scrape_website(url):
