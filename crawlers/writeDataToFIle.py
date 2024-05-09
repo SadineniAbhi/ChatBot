@@ -10,8 +10,12 @@ def write_data(data):
     try:
         with open(file_path, "a", encoding="utf-8") as file:
             file.write(data)
-    except:
-        raise CustomError("Unable to write data to the file")
-        
+    except FileNotFoundError:
+        print("File not found!")
+    except PermissionError:
+        print("Permission denied!")
+    except Exception as e:
+        print("An error occurred:", e)
+
 
 

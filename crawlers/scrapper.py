@@ -22,7 +22,7 @@ def scrape_website(url):
                 all_text = soup.get_text()
                 write_data(all_text)
             else:
-                raise CustomError("No data found")
+                  print("no data found at url",url_lis[i])
             i+=1
         except Exception as e:
             print("An exception has ocured while scrapping",url_lis[i])
