@@ -3,6 +3,4 @@ __pycache__/
 *.pyc
 *.pyo
 node_modules/
-*scrapped_data.txt
-*logfile.txt
-
+/data
