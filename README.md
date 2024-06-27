@@ -5,7 +5,7 @@ Build custom Chatbot based on LLMs by providing coustom context for context-spec
 for getting started follow the steps below:-
 
 clone the github repositry 
-`git clone https://github.com/SadineniAbhi/CustomChatbot.git`
+```git clone https://github.com/SadineniAbhi/CustomChatbot.git```
 
 change directory 
 `cd CustomChatbot`
