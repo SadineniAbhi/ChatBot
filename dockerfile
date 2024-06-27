@@ -10,16 +10,20 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     git
+RUN  apt-get install -y python3-venv
+RUN python3 -m venv /opt/venv
 
-# Set the working directory inside the container
-WORKDIR /ChatBot
 
 # Copy ChatBot directory into the container at /ChatBot
 COPY ChatBot /ChatBot
+WORKDIR /ChatBot
 
-# Install any needed packages specified in requirements.txt
-RUN pip3 install --upgrade pip && \
-    pip3 install -r requirements.txt
+RUN /opt/venv/bin/pip install --upgrade pip && \
+    /opt/venv/bin/pip install -r requirements.txt
+
+# Add the virtual environment's bin directory to the PATH
+ENV PATH="/opt/venv/bin:$PATH"
+
 
 # Copy context.txt into the container (adjust path if needed)
 COPY context.txt /ChatBot/rag/content.txt
@@ -28,4 +32,4 @@ COPY context.txt /ChatBot/rag/content.txt
 EXPOSE 5000
 
 # Command to run the Flask application (adjust as needed)
-CMD ["python3", "app.py"]
+CMD ["/opt/venv/bin/python3", "app.py"]
