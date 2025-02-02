@@ -1,35 +1,35 @@
-# Use Ubuntu as a parent image
-FROM ubuntu:latest
+# Use a smaller base image
+FROM python:3.11-slim AS builder
 
 # Set environment variables
 ENV OPENAI_API_KEY=""
 ENV DefaultLangchainUserAgent=""
 
-# Update package index and install necessary packages
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    git
-RUN  apt-get install -y python3-venv
-RUN python3 -m venv /opt/venv
-
-
-# Copy ChatBot directory into the container at /ChatBot
-COPY ChatBot /ChatBot
+RUN git clone https://github.com/SadineniAbhi/ChatBot.git
+# Set working directory
 WORKDIR /ChatBot
 
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends git && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Create a virtual environment
+RUN python3 -m venv /opt/venv
+
+# Copy only necessary files
+COPY requirements.txt ./
 RUN /opt/venv/bin/pip install --upgrade pip && \
     /opt/venv/bin/pip install -r requirements.txt
 
-# Add the virtual environment's bin directory to the PATH
+# Copy the ChatBot directory
+COPY ChatBot /ChatBot
+COPY mycontent.txt /ChatBot/rag/content.txt
+
+# Set the PATH to include the virtual environment
 ENV PATH="/opt/venv/bin:$PATH"
 
-
-# Copy context.txt into the container (adjust path if needed)
-COPY context.txt /ChatBot/rag/content.txt
-
-# Expose the Flask port (if using Flask)
+# Expose the Flask port
 EXPOSE 5000
 
-# Command to run the Flask application (adjust as needed)
-CMD ["/opt/venv/bin/python3", "app.py"]
+# Command to run the Flask application
+CMD ["python", "app.py"]
