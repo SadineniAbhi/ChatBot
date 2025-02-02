@@ -5,24 +5,24 @@ FROM python:3.11-slim AS builder
 ENV OPENAI_API_KEY=""
 ENV DefaultLangchainUserAgent=""
 
-RUN git clone https://github.com/SadineniAbhi/ChatBot.git
-# Set working directory
-WORKDIR /ChatBot
-
-# Install dependencies
+# Install git before using it
 RUN apt-get update && apt-get install -y --no-install-recommends git && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Clone the repository after Git is installed
+RUN git clone https://github.com/SadineniAbhi/ChatBot.git
+
+# Set working directory
+WORKDIR /ChatBot
 
 # Create a virtual environment
 RUN python3 -m venv /opt/venv
 
-# Copy only necessary files
-COPY requirements.txt ./
+# Install dependencies
 RUN /opt/venv/bin/pip install --upgrade pip && \
     /opt/venv/bin/pip install -r requirements.txt
 
-# Copy the ChatBot directory
-COPY ChatBot /ChatBot
+# Copy additional content
 COPY mycontent.txt /ChatBot/rag/content.txt
 
 # Set the PATH to include the virtual environment

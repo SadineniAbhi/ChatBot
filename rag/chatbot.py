@@ -10,6 +10,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 USER_AGENT = os.getenv("DefaultLangchainUserAgent")
 
+
 if not OPENAI_API_KEY:
     raise ValueError("Missing OpenAI API key")
 
