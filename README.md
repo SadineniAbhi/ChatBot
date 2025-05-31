@@ -1,27 +1,56 @@
-# ChatBot
+# 🤖 Custom ChatBot
 
-Build custom Chatbot based on LLMs by providing coustom context for context-specific retrival.
+Build a custom chatbot powered by Large Language Models (LLMs) using your own knowledge base. This project enables **context-specific retrieval** for more accurate and relevant responses.
 
-for getting started follow the steps below:-
+---
 
-clone the github repositry 
-```git clone https://github.com/SadineniAbhi/CustomChatbot.git```
+## 🧰 Features
 
-change directory 
-`cd CustomChatbot`
+- 🔍 Contextual Retrieval using your own content
+- 🌐 Flask-based REST API server
+- 🐳 Dockerized setup for easy deployment
+- 🔐 API Key-based access to OpenAI or compatible models
 
-clone the Chatbot directory
+---
 
-`git clone https://github.com/SadineniAbhi/ChatBot.git`
+## 📦 Getting Started
 
-build the docker image 
-`docker build -t docker_image_name .`
+Follow the steps below to set up and run the chatbot locally using Docker.
 
-run your docker image 
-`docker run -d -p 5000:5000 -e OPENAI_API_KEY="your_openai_api_key" docker_image_name`
+---
 
-you can now access your service through localhost at port 5000
+### 1. Clone This Repository
 
+```bash
+git clone https://github.com/SadineniAbhi/CustomChatbot.git
+cd CustomChatbot
+```
+---
+
+### 2. Build the Docker Image
+
+```bash
+docker build -t custom-chatbot .
+```
+---
+### 3. Run the Docker Container
+
+```bash
+docker run -d \
+  -p 5000:5000 \
+  -e OPENAI_API_KEY="your_openai_api_key" \
+  -v /absolute/path/to/your/content.txt:/ChatBot/rag/content.txt \
+  custom-chatbot
+```
+
+---
+
+## 🌐 Access the API
+
+Once running, the chatbot will be available at:
+
+
+You can interact with it using HTTP requests (e.g., `curl`, Postman, or from a frontend app).
 
 
 
