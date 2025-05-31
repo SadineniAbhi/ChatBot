@@ -35,6 +35,8 @@ docker build -t custom-chatbot .
 ---
 ### 3. Run the Docker Container
 
+Mount your own **text file** as a volume to provide custom context data that the chatbot can use for grounding responses:
+
 ```bash
 docker run -d \
   -p 5000:5000 \
@@ -42,7 +44,6 @@ docker run -d \
   -v /absolute/path/to/your/content.txt:/ChatBot/rag/content.txt \
   custom-chatbot
 ```
-
 ---
 
 ## 🌐 Access the API
