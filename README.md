@@ -28,8 +28,9 @@ cd CustomChatbot
 ---
 
 ### 2. Build the Docker Image
-
+Add your data to the mycontent.txt file to vectorize the text
 ```bash
+touch mycontent.txt 
 docker build -t custom-chatbot .
 ```
 ---
